@@ -1,20 +1,20 @@
-// gidirabi111@gmil.com
+# Makefile
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 
 all: tree
 
-tree: main.o node.o tree.o
-	$(CXX) $(CXXFLAGS) -o tree main.o node.o tree.o
+tree: main.o Node.o Tree.o
+	$(CXX) $(CXXFLAGS) -o tree main.o Node.o Tree.o
 
-main.o: main.cpp
+main.o: main.cpp Node.hpp Tree.hpp
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
-node.o: node.cpp node.hpp
-	$(CXX) $(CXXFLAGS) -c node.cpp
+Node.o: Node.cpp Node.hpp
+	$(CXX) $(CXXFLAGS) -c Node.cpp
 
-tree.o: tree.cpp tree.hpp node.hpp
-	$(CXX) $(CXXFLAGS) -c tree.cpp
+Tree.o: Tree.cpp Tree.hpp Node.hpp
+	$(CXX) $(CXXFLAGS) -c Tree.cpp
 
 clean:
 	rm -f *.o tree

@@ -1,9 +1,14 @@
 // gidirabi111@gmil.com
 // node.cpp
-#include "node.hpp"
+#include "Node.hpp"
 
 template <typename T>
 Node<T>::Node(T val) : value(val) {}
+
+// Generic constructor for different types U
+template <typename T>
+template <typename U>
+Node<T>::Node(U val) : value(val) {}
 
 template <typename T>
 T Node<T>::get_value() const { return value; }

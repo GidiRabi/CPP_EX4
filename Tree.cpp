@@ -1,6 +1,6 @@
 // gidirabi111@gmil.com
-// tree.cpp
-#include "tree.hpp"
+//Tree.cpp
+#include "Tree.hpp"
 #include <queue>
 #include <stack>
 
@@ -8,15 +8,30 @@ template <typename T>
 Tree<T>::Tree() : root(nullptr) {}
 
 template <typename T>
-void Tree<T>::add_root(T value) {
-    root = new Node<T>(value);
+void Tree<T>::add_root(Node<T> root_node) {
+    root = new Node<T>(root_node.get_value());
 }
 
 template <typename T>
-void Tree<T>::add_sub_node(T parent_value, T child_value) {
-    auto parent_node = find(root, parent_value);
-    if (parent_node) {
-        parent_node->add_child(new Node<T>(child_value));
+template <typename U>
+void Tree<T>::add_root(U val) {
+    root = new Node<T>(val);
+}
+
+template <typename T>
+void Tree<T>::add_sub_node(Node<T> parent_node, Node<T> child_node) {
+    auto parent = find(root, parent_node.get_value());
+    if (parent) {
+        parent->add_child(new Node<T>(child_node.get_value()));
+    }
+}
+
+template <typename T>
+template <typename U, typename V>
+void Tree<T>::add_sub_node(U parent_val, V child_val) {
+    auto parent = find(root, parent_val);
+    if (parent) {
+        parent->add_child(new Node<T>(child_val));
     }
 }
 
@@ -73,15 +88,15 @@ void Tree<T>::bfs(std::vector<Node<T>*>& nodes) const {
 }
 
 template <typename T>
-void Tree<T>::dfs(std::vector<Node<T>*>& nodes) const {
-    if (!root) return;
+void Tree<T>::dfs(Node<T>* node, std::vector<Node<T>*>& nodes) const {
+    if (!node) return;
     std::stack<Node<T>*> s;
-    s.push(root);
+    s.push(node);
     while (!s.empty()) {
-        auto node = s.top();
+        auto current = s.top();
         s.pop();
-        nodes.push_back(node);
-        for (auto it = node->get_children().rbegin(); it != node->get_children().rend(); ++it) {
+        nodes.push_back(current);
+        for (auto it = current->get_children().rbegin(); it != current->get_children().rend(); ++it) {
             s.push(*it);
         }
     }
@@ -118,7 +133,7 @@ std::vector<Node<T>*> Tree<T>::begin_bfs_scan() const {
 template <typename T>
 std::vector<Node<T>*> Tree<T>::begin_dfs_scan() const {
     std::vector<Node<T>*> nodes;
-    dfs(nodes);
+    dfs(root, nodes);
     return nodes;
 }
 
