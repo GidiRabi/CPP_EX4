@@ -1,3 +1,4 @@
+//Node.hpp
 #include "Node.hpp"
 
 
@@ -509,6 +510,29 @@ bool Node<T>::iterator_bfs::operator==(const iterator_bfs& other) const {
 template<typename T>
 bool Node<T>::iterator_bfs::operator!=(const iterator_bfs& other) const {
     return current != other.current;
+}
+
+template<typename T>
+Node<T>::iterator_bfs::iterator_bfs(Node<T>* root) : current(nullptr) {
+    if (root != nullptr) {
+        queue.push(root);
+        advance();  // Ensure the current is set correctly at construction
+    }
+}
+
+template<typename T>
+void Node<T>::iterator_bfs::advance() {
+    if (!queue.empty()) {
+        current = queue.front();
+        queue.pop();
+        for (auto& child : current->children) {
+            if (child.get() != nullptr) {
+                queue.push(child.get());
+            }
+        }
+    } else {
+        current = nullptr;
+    }
 }
 
 // ----- Const BFS Iterator Definitions -----

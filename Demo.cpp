@@ -1,6 +1,4 @@
-/**
- * Demo app for Ex4
- */
+//Demo.cpp
 #include <iostream>
 #include <string>
 #include "Node.hpp"

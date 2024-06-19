@@ -1,3 +1,4 @@
+//Node.hpp
 #ifndef NODE_HPP
 #define NODE_HPP
 
@@ -110,6 +111,8 @@ public:
     class iterator_bfs {
     private:
         Node<T>* current;
+		void advance();
+		std::queue<Node<T>*> queue;  // Use a queue to store pointers to nodes
 
     public:
         explicit iterator_bfs(Node<T>* root);
@@ -120,6 +123,7 @@ public:
         bool operator==(const iterator_bfs& other) const;
         bool operator!=(const iterator_bfs& other) const;
     };
+
 
     // Const BFS iterator
     class const_iterator_bfs {
