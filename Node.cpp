@@ -1,5 +1,18 @@
 #include "Node.hpp"
 
+
+template<typename T>
+Node<T>::Node(const T& data) : data(data) {}
+
+template<typename T>
+Node<T>::~Node() {}
+
+template<typename T>
+T Node<T>::get_value() const {
+    return data;
+}
+
+
 // ----- PreOrder Iterator Definitions -----
 template<typename T>
 Node<T>::iterator_preorder::iterator_preorder(Node<T>* root) {
@@ -10,12 +23,12 @@ Node<T>::iterator_preorder::iterator_preorder(Node<T>* root) {
 }
 
 template<typename T>
-T& Node<T>::iterator_preorder::operator*() const {
+Node<T>& Node<T>::iterator_preorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-T* Node<T>::iterator_preorder::operator->() const {
+Node<T>* Node<T>::iterator_preorder::operator->() const {
     return &current->data;
 }
 
@@ -60,12 +73,12 @@ Node<T>::const_iterator_preorder::const_iterator_preorder(const Node<T>* root) {
 }
 
 template<typename T>
-const T& Node<T>::const_iterator_preorder::operator*() const {
+const Node<T>& Node<T>::const_iterator_preorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-const T* Node<T>::const_iterator_preorder::operator->() const {
+const Node<T>* Node<T>::const_iterator_preorder::operator->() const {
     return &current->data;
 }
 
@@ -111,12 +124,12 @@ Node<T>::const_iterator_preorder::const_iterator_preorder(const Node<T>* root) {
 }
 
 template<typename T>
-const T& Node<T>::const_iterator_preorder::operator*() const {
+const Node<T>& Node<T>::const_iterator_preorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-const T* Node<T>::const_iterator_preorder::operator->() const {
+const Node<T>* Node<T>::const_iterator_preorder::operator->() const {
     return &current->data;
 }
 
@@ -165,12 +178,12 @@ Node<T>::iterator_inorder::iterator_inorder(Node<T>* root) {
 }
 
 template<typename T>
-T& Node<T>::iterator_inorder::operator*() const {
+Node<T>& Node<T>::iterator_inorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-T* Node<T>::iterator_inorder::operator->() const {
+Node<T>* Node<T>::iterator_inorder::operator->() const {
     return &current->data;
 }
 
@@ -220,12 +233,12 @@ Node<T>::const_iterator_inorder::const_iterator_inorder(const Node<T>* root) {
 }
 
 template<typename T>
-const T& Node<T>::const_iterator_inorder::operator*() const {
+const Node<T>& Node<T>::const_iterator_inorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-const T* Node<T>::const_iterator_inorder::operator->() const {
+const Node<T>* Node<T>::const_iterator_inorder::operator->() const {
     return &current->data;
 }
 
@@ -276,12 +289,12 @@ Node<T>::const_iterator_inorder::const_iterator_inorder(const Node<T>* root) {
 }
 
 template<typename T>
-const T& Node<T>::const_iterator_inorder::operator*() const {
+const Node<T>& Node<T>::const_iterator_inorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-const T* Node<T>::const_iterator_inorder::operator->() const {
+const Node<T>* Node<T>::const_iterator_inorder::operator->() const {
     return &current->data;
 }
 
@@ -329,12 +342,12 @@ Node<T>::iterator_postorder::iterator_postorder(Node<T>* root) {
 }
 
 template<typename T>
-T& Node<T>::iterator_postorder::operator*() const {
+Node<T>& Node<T>::iterator_postorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-T* Node<T>::iterator_postorder::operator->() const {
+Node<T>* Node<T>::iterator_postorder::operator->() const {
     return &current->data;
 }
 
@@ -381,12 +394,12 @@ Node<T>::const_iterator_postorder::const_iterator_postorder(const Node<T>* root)
 }
 
 template<typename T>
-const T& Node<T>::const_iterator_postorder::operator*() const {
+const Node<T>& Node<T>::const_iterator_postorder::operator*() const {
     return current->data;
 }
 
 template<typename T>
-const T* Node<T>::const_iterator_postorder::operator->() const {
+const Node<T>* Node<T>::const_iterator_postorder::operator->() const {
     return &current->data;
 }
 
@@ -457,12 +470,12 @@ Node<T>::iterator_bfs::iterator_bfs(Node<T>* root) {
 }
 
 template<typename T>
-T& Node<T>::iterator_bfs::operator*() const {
+Node<T>& Node<T>::iterator_bfs::operator*() const {
     return current->data;
 }
 
 template<typename T>
-T* Node<T>::iterator_bfs::operator->() const {
+Node<T>* Node<T>::iterator_bfs::operator->() const {
     return &current->data;
 }
 
@@ -508,12 +521,12 @@ Node<T>::const_iterator_bfs::const_iterator_bfs(const Node<T>* root) {
 }
 
 template<typename T>
-const T& Node<T>::const_iterator_bfs::operator*() const {
+const Node<T>& Node<T>::const_iterator_bfs::operator*() const {
     return current->data;
 }
 
 template<typename T>
-const T* Node<T>::const_iterator_bfs::operator->() const {
+const Node<T>* Node<T>::const_iterator_bfs::operator->() const {
     return &current->data;
 }
 

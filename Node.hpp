@@ -7,23 +7,24 @@
 template<typename T>
 class Node {
 public:
-    T data;
+    T data;  // Publicly accessible data
     std::vector<std::unique_ptr<Node<T>>> children;
 
     explicit Node(const T& data) : data(data) {}
-    Node(const Node& other) = delete; // Non-copyable
-    Node& operator=(const Node& other) = delete; // Non-assignable
-	~Node();
+    Node(const Node& other) = delete;  // Non-copyable
+    Node& operator=(const Node& other) = delete;  // Non-assignable
+    ~Node() = default;
+
+    T get_value() const;  // Accessor for node data
 
     // PreOrder iterator
     class iterator_preorder {
     private:
         Node<T>* current;
-
     public:
         explicit iterator_preorder(Node<T>* root);
-        T& operator*() const;
-        T* operator->() const;
+        Node<T>& operator*() const;
+        Node<T>* operator->() const;
         iterator_preorder& operator++();
         iterator_preorder operator++(int);
         bool operator==(const iterator_preorder& other) const;
@@ -37,8 +38,8 @@ public:
 
     public:
         explicit const_iterator_preorder(const Node<T>* root);
-        const T& operator*() const;
-        const T* operator->() const;
+        const Node<T>& operator*() const;
+        const Node<T>* operator->() const;
         const_iterator_preorder& operator++();
         const_iterator_preorder operator++(int);
         bool operator==(const const_iterator_preorder& other) const;
@@ -52,8 +53,8 @@ public:
 
     public:
         explicit iterator_postorder(Node<T>* root);
-        T& operator*() const;
-        T* operator->() const;
+        Node<T>& operator*() const;
+        Node<T>* operator->() const;
         iterator_postorder& operator++();
         iterator_postorder operator++(int);
         bool operator==(const iterator_postorder& other) const;
@@ -67,8 +68,8 @@ public:
 
     public:
         explicit const_iterator_postorder(const Node<T>* root);
-        const T& operator*() const;
-        const T* operator->() const;
+        const Node<T>& operator*() const;
+        const Node<T>* operator->() const;
         const_iterator_postorder& operator++();
         const_iterator_postorder operator++(int);
         bool operator==(const const_iterator_postorder& other) const;
@@ -82,8 +83,8 @@ public:
 
     public:
         explicit iterator_inorder(Node<T>* root);
-        T& operator*() const;
-        T* operator->() const;
+        Node<T>& operator*() const;
+        Node<T>* operator->() const;
         iterator_inorder& operator++();
         iterator_inorder operator++(int);
         bool operator==(const iterator_inorder& other) const;
@@ -97,8 +98,8 @@ public:
 
     public:
         explicit const_iterator_inorder(const Node<T>* root);
-        const T& operator*() const;
-        const T* operator->() const;
+        const Node<T>& operator*() const;
+        const Node<T>* operator->() const;
         const_iterator_inorder& operator++();
         const_iterator_inorder operator++(int);
         bool operator==(const const_iterator_inorder& other) const;
@@ -112,8 +113,8 @@ public:
 
     public:
         explicit iterator_bfs(Node<T>* root);
-        T& operator*() const;
-        T* operator->() const;
+        Node<T>& operator*() const;
+        Node<T>* operator->() const;
         iterator_bfs& operator++();
         iterator_bfs operator++(int);
         bool operator==(const iterator_bfs& other) const;
@@ -127,8 +128,8 @@ public:
 
     public:
         explicit const_iterator_bfs(const Node<T>* root);
-        const T& operator*() const;
-        const T* operator->() const;
+        const Node<T>& operator*() const;
+        const Node<T>* operator->() const;
         const_iterator_bfs& operator++();
         const_iterator_bfs operator++(int);
         bool operator==(const const_iterator_bfs& other) const;

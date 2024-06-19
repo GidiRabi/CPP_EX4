@@ -13,29 +13,40 @@ public:
     Tree();
     ~Tree();
 
-    void add_root(const T& data);
-    void add_sub_node(Node<T>* parent, const T& child_data);
+    void add_root(Node<T>& node);
+    void add_sub_node(Node<T>& parent, Node<T>& child);
 
-    typename Node<T>::iterator_preorder begin_preorder();
-    typename Node<T>::iterator_preorder end_preorder();
-    typename Node<T>::const_iterator_preorder cbegin_preorder() const;
-    typename Node<T>::const_iterator_preorder cend_preorder() const;
+    // Methods to support range-based for loops
+    typename Node<T>::iterator_bfs begin();
+    typename Node<T>::iterator_bfs end();
 
-    typename Node<T>::iterator_inorder begin_inorder();
-    typename Node<T>::iterator_inorder end_inorder();
-    typename Node<T>::const_iterator_inorder cbegin_inorder() const;
-    typename Node<T>::const_iterator_inorder cend_inorder() const;
+    typename Node<T>::const_iterator_bfs begin() const;
+    typename Node<T>::const_iterator_bfs end() const;
 
-    typename Node<T>::iterator_postorder begin_postorder();
-    typename Node<T>::iterator_postorder end_postorder();
-    typename Node<T>::const_iterator_postorder cbegin_postorder() const;
-    typename Node<T>::const_iterator_postorder cend_postorder() const;
+    typename Node<T>::iterator_preorder begin_pre_order(); // Corrected naming
+    typename Node<T>::iterator_preorder end_pre_order();   // Corrected naming
+    typename Node<T>::const_iterator_preorder cbegin_pre_order() const; // Corrected naming
+    typename Node<T>::const_iterator_preorder cend_pre_order() const;   // Corrected naming
 
-    typename Node<T>::iterator_bfs begin_bfs();
-    typename Node<T>::iterator_bfs end_bfs();
-    typename Node<T>::const_iterator_bfs cbegin_bfs() const;
-    typename Node<T>::const_iterator_bfs cend_bfs() const;
+    typename Node<T>::iterator_inorder begin_in_order();   // Corrected naming
+    typename Node<T>::iterator_inorder end_in_order();     // Corrected naming
+    typename Node<T>::const_iterator_inorder cbegin_in_order() const; // Corrected naming
+    typename Node<T>::const_iterator_inorder cend_in_order() const;   // Corrected naming
+
+    typename Node<T>::iterator_postorder begin_post_order(); // Corrected naming
+    typename Node<T>::iterator_postorder end_post_order();   // Corrected naming
+    typename Node<T>::const_iterator_postorder cbegin_post_order() const; // Corrected naming
+    typename Node<T>::const_iterator_postorder cend_post_order() const;   // Corrected naming
+
+    typename Node<T>::iterator_bfs begin_bfs_scan();        // Corrected naming to match demo.cpp
+    typename Node<T>::iterator_bfs end_bfs_scan();          // Corrected naming to match demo.cpp
+    typename Node<T>::const_iterator_bfs cbegin_bfs_scan() const; // Corrected naming
+    typename Node<T>::const_iterator_bfs cend_bfs_scan() const;   // Corrected naming
+
+	// Operator<< to support printing
+    template<typename U, int M>
+    friend std::ostream& operator<<(std::ostream& os, const Tree<U, M>& tree);
 };
 
-#include "Tree.cpp"  // Include the implementation details
+#include "Tree.cpp"  // Include the implementation
 #endif // TREE_HPP
