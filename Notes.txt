@@ -1,0 +1,13 @@
+To emulate pointers, we need, at least:
+1. copy constructor
+2. operator= (copy) 
+3. operator==, != (compare) 
+4. operator* (access value) 
+5. operator++ (increment)
+
+
+Iterator-
+Must have a class inside for both const and non-const iterators
+
+To see a good example of the iterators classes:
+	- Folder 8 -> Folder 2 -> hpp file
