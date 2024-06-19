@@ -1,71 +1,106 @@
 #include "Tree.hpp"
-#include "Node.hpp"
-#include "Iterators.hpp"
-#include <iostream>
 
-Tree::Tree() : root(nullptr) {}
-
-Tree::~Tree() {
-    delete root;
+template<typename T, int K>
+Tree<T, K>::Tree() {
 }
 
-void Tree::add_root(Node<std::string>& node) {
-    if (root) {
-        delete root;
+template<typename T, int K>
+Tree<T, K>::~Tree() {
+}
+
+template<typename T, int K>
+void Tree<T, K>::add_root(const T& data) {
+    root = std::make_unique<Node<T>>(data);
+}
+
+template<typename T, int K>
+void Tree<T, K>::add_sub_node(Node<T>* parent, const T& child_data) {
+    if (parent && parent->children.size() < K) {
+        parent->children.emplace_back(std::make_unique<Node<T>>(child_data));
     }
-    root = new Node<std::string>(node);
 }
 
-void Tree::add_sub_node(Node<std::string>& parent, Node<int>& child) {
-    parent.children.push_back(new Node<int>(child));
+template<typename T, int K>
+typename Node<T>::iterator_preorder Tree<T, K>::begin_preorder() {
+    return typename Node<T>::iterator_preorder(root.get());
 }
 
-void Tree::add_sub_node(Node<std::string>& parent, Node<std::string>& child) {
-    parent.children.push_back(new Node<std::string>(child));
+template<typename T, int K>
+typename Node<T>::iterator_preorder Tree<T, K>::end_preorder() {
+    return typename Node<T>::iterator_preorder(nullptr);
 }
 
-void Tree::add_sub_node(Node<std::string>& parent, Node<double>& child) {
-    parent.children.push_back(new Node<double>(child));
+template<typename T, int K>
+typename Node<T>::const_iterator_preorder Tree<T, K>::cbegin_preorder() const {
+    return typename Node<T>::const_iterator_preorder(root.get());
 }
 
-// Pre-order iterator methods
-PreOrderIterator<std::string> Tree::begin_pre_order() {
-    return PreOrderIterator<std::string>(root);
+template<typename T, int K>
+typename Node<T>::const_iterator_preorder Tree<T, K>::cend_preorder() const {
+    return typename Node<T>::const_iterator_preorder(nullptr);
 }
 
-PreOrderIterator<std::string> Tree::end_pre_order() {
-    return PreOrderIterator<std::string>(nullptr);
+template<typename T, int K>
+typename Node<T>::iterator_inorder Tree<T, K>::begin_inorder() {
+    return typename Node<T>::iterator_inorder(root.get());
 }
 
-// Post-order iterator methods
-PostOrderIterator<std::string> Tree::begin_post_order() {
-    return PostOrderIterator<std::string>(root);
+template<typename T, int K>
+typename Node<T>::iterator_inorder Tree<T, K>::end_inorder() {
+    return typename Node<T>::iterator_inorder(nullptr);
 }
 
-PostOrderIterator<std::string> Tree::end_post_order() {
-    return PostOrderIterator<std::string>(nullptr);
+template<typename T, int K>
+typename Node<T>::const_iterator_inorder Tree<T, K>::cbegin_inorder() const {
+    return typename Node<T>::const_iterator_inorder(root.get());
 }
 
-// In-order iterator methods
-InOrderIterator<std::string> Tree::begin_in_order() {
-    return InOrderIterator<std::string>(root);
+template<typename T, int K>
+typename Node<T>::const_iterator_inorder Tree<T, K>::cend_inorder() const {
+    return typename Node<T>::const_iterator_inorder(nullptr);
 }
 
-InOrderIterator<std::string> Tree::end_in_order() {
-    return InOrderIterator<std::string>(nullptr);
+template<typename T, int K>
+typename Node<T>::iterator_postorder Tree<T, K>::begin_postorder() {
+    return typename Node<T>::iterator_postorder(root.get());
 }
 
-// BFS iterator methods
-BFSIterator<std::string> Tree::begin_bfs_scan() {
-    return BFSIterator<std::string>(root);
+template<typename T, int K>
+typename Node<T>::iterator_postorder Tree<T, K>::end_postorder() {
+    return typename Node<T>::iterator_postorder(nullptr);
 }
 
-BFSIterator<std::string> Tree::end_bfs_scan() {
-    return BFSIterator<std::string>(nullptr);
+template<typename T, int K>
+typename Node<T>::const_iterator_postorder Tree<T, K>::cbegin_postorder() const {
+    return typename Node<T>::const_iterator_postorder(root.get());
 }
 
-// Print method
-std::ostream& operator<<(std::ostream& os, const Tree& tree) {
-    // Implement a way to print the tree using a GUI or any other method
-    return os;
+template<typename T, int K>
+typename Node<T>::const_iterator_postorder Tree<T, K>::cend_postorder() const {
+    return typename Node<T>::const_iterator_postorder(nullptr);
 }
+
+template<typename T, int K>
+typename Node<T>::iterator_bfs Tree<T, K>::begin_bfs() {
+    return typename Node<T>::iterator_bfs(root.get());
+}
+
+template<typename T, int K>
+typename Node<T>::iterator_bfs Tree<T, K>::end_bfs() {
+    return typename Node<T>::iterator_bfs(nullptr);
+}
+
+template<typename T, int K>
+typename Node<T>::const_iterator_bfs Tree<T, K>::cbegin_bfs() const {
+    return typename Node<T>::const_iterator_bfs(root.get());
+}
+
+template<typename T, int K>
+typename Node<T>::const_iterator_bfs Tree<T, K>::cend_bfs() const {
+    return typename Node<T>::const_iterator_bfs(nullptr);
+}
+
+// Explicit template instantiation for expected types
+template class Tree<int>;
+template class Tree<double>;
+template class Tree<std::string>;

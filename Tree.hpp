@@ -2,33 +2,40 @@
 #define TREE_HPP
 
 #include "Node.hpp"
-#include <string>
-#include <iostream>
+#include <memory>
 
+template<typename T, int K = 2>
 class Tree {
 private:
-    Node<std::string>* root;
+    std::unique_ptr<Node<T>> root;
 
 public:
     Tree();
     ~Tree();
 
-    void add_root(Node<std::string>& node);
-    void add_sub_node(Node<std::string>& parent, Node<int>& child);
-    void add_sub_node(Node<std::string>& parent, Node<std::string>& child);
-    void add_sub_node(Node<std::string>& parent, Node<double>& child);
+    void add_root(const T& data);
+    void add_sub_node(Node<T>* parent, const T& child_data);
 
-    PreOrderIterator<std::string> begin_pre_order();
-    PreOrderIterator<std::string> end_pre_order();
-    PostOrderIterator<std::string> begin_post_order();
-    PostOrderIterator<std::string> end_post_order();
-    InOrderIterator<std::string> begin_in_order();
-    InOrderIterator<std::string> end_in_order();
-    BFSIterator<std::string> begin_bfs_scan();
-    BFSIterator<std::string> end_bfs_scan();
+    typename Node<T>::iterator_preorder begin_preorder();
+    typename Node<T>::iterator_preorder end_preorder();
+    typename Node<T>::const_iterator_preorder cbegin_preorder() const;
+    typename Node<T>::const_iterator_preorder cend_preorder() const;
 
-    // Print method
-    friend std::ostream& operator<<(std::ostream& os, const Tree& tree);
+    typename Node<T>::iterator_inorder begin_inorder();
+    typename Node<T>::iterator_inorder end_inorder();
+    typename Node<T>::const_iterator_inorder cbegin_inorder() const;
+    typename Node<T>::const_iterator_inorder cend_inorder() const;
+
+    typename Node<T>::iterator_postorder begin_postorder();
+    typename Node<T>::iterator_postorder end_postorder();
+    typename Node<T>::const_iterator_postorder cbegin_postorder() const;
+    typename Node<T>::const_iterator_postorder cend_postorder() const;
+
+    typename Node<T>::iterator_bfs begin_bfs();
+    typename Node<T>::iterator_bfs end_bfs();
+    typename Node<T>::const_iterator_bfs cbegin_bfs() const;
+    typename Node<T>::const_iterator_bfs cend_bfs() const;
 };
 
+#include "Tree.cpp"  // Include the implementation details
 #endif // TREE_HPP

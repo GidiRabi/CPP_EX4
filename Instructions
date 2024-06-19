@@ -31,5 +31,38 @@
 יש להוסיף קובץ Makefile כאשר הפקודה `make tree` מריצה את התוכנית הראשית שלכם. עליכם להגיש קובץ `README` המסביר את ההיררכיה של המחלקות ובאילו ספריות השתמשתם.
 כמו כן, עליכם לכתוב בתחילת כל קובץ את המייל שלכם. אי עמידה בהנחיות תגרור הפחתה בציון.
 
-בהצלחה!
-   
+
+
+# Trees - STL, Templates, and Iterators
+A tree is a connected graph without circles. In Algorithms 1 you learned about graph scanning algorithms (like BFS and DFS).
+In this assignment you will realize a container representing a k-ary tree (a k-ary tree is a tree in which each vertex has at most k children. For example, a binary tree is a 2-ary tree.) a generic that contains keys of any type (eg numbers, strings and classes).
+The dipole state of the tree is a binary tree (ie k=2). During the creation phase of the container, you will have to specify the type of keys it contains and the maximum number of children each vertex can have. If this number is not specified, the tree will be a binary tree.
+You must implement the following iterators:
+1. Pre-Order iterator - an iterator that scans the tree in the following way: current node -> left subtree -> right subtree (this iterator works in this way for a binary tree only! For a general tree return a normal DFS scan starting from the root of the tree).
+2. Post-Order Iterator - an iterator that scans the tree in the following way: left subtree -> right subtree -> current node (this iterator works this way for a binary tree only! For a general tree return a normal DFS scan starting from the root of the tree).
+3. In-Order iterator - an iterator that scans the tree in the following way: left subtree -> current node -> right subtree (this iterator works in this way for a binary tree only! For a general tree return a normal DFS scan starting from the root of the tree).
+5. BFS iterator - scanning the tree laterally (from left to right) (works on a general tree).
+6. DFS iterator - scanning the tree using the DFS algorithm (works on a general tree).
+7. Heap iterator - turning a binary tree into a minimum heap, for further reading: https://he.wikipedia.org/wiki/%D7%A2%D7%A8%D7%99%D7%9E%D7%94_%D7%91 %D7%99%D7%A0%D7%90%D7%A8%D7%99%D7%AA (here you can in the algorithms of the standard library).
+
+The name of the container should be `tree`. The following methods must be defined:
+1. The `add_root` method - adding the root of the tree. The method accepts some node and puts it at the root of the tree.
+2. The `add_sub_node` method - adding a child to the parent. The method accepts a node in the tree and some node and creates a child for that node.
+3. The methods `begin_pre_order`, `end_pre_order`. The methods return iterators for traversing the tree using the Pre-Order method.
+4. The methods `begin_post_order`, `end_post_order`. The methods return iterators for traversing the tree using the Post-Order method.
+5. The methods `begin_in_order`, `end_in_order`. The methods return iterators for traversing the tree using the In-Order method.
+6. The methods `begin_bfs_scan`, `end_bfs_scan`. The methods return iterators for traversing the tree using the BFS algorithm.
+7. The methods `begin_dfs_scan`, `end_dfs_scan`. The methods return iterators for traversing the tree using the DFS algorithm.
+8. The `myHeap` method. The method transforms a binary tree into a minimum stack and returns iterators for the resulting stack.
+9. A destructor must be implemented that deletes the entire tree.
+10. Print function. The printing will be done with the help of GUI. You have to create an interface that prints the tree on the screen in a way that makes sense for your consideration.
+
+You must write a main file in which you demonstrate how the program works. You should write a class called Complex (which represents dummy numbers) and use it as well to demonstrate your code. (You learned about this department in practices).
+
+Additionally, you must write comprehensive tests for your code.
+
+To use the GUI you can use the following library: https://wiki.qt.io/Qt_for_Beginners and the guide: https://www.youtube.com/watch?v=cXojtB8vS2E. Of course you can use any library you want.
+
+A Makefile must be added when the `make tree' command runs your main program. You must submit a `README` file that explains the hierarchy of the classes and which libraries you used.
+Also, you must write your email at the beginning of each file. Failure to comply with the guidelines will result in a grade reduction.
+
