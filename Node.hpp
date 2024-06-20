@@ -1,9 +1,10 @@
-//Node.hpp
 #ifndef NODE_HPP
 #define NODE_HPP
 
 #include <vector>
 #include <memory>
+#include <stack>
+#include <queue>
 
 template<typename T>
 class Node {
@@ -11,10 +12,10 @@ public:
     T data;  // Publicly accessible data
     std::vector<std::unique_ptr<Node<T>>> children;
 
-    explicit Node(const T& data) : data(data) {}
+    explicit Node(const T& data);
     Node(const Node& other) = delete;  // Non-copyable
     Node& operator=(const Node& other) = delete;  // Non-assignable
-    ~Node() = default;
+    ~Node();
 
     T get_value() const;  // Accessor for node data
 
@@ -22,6 +23,7 @@ public:
     class iterator_preorder {
     private:
         Node<T>* current;
+        std::stack<Node<T>*> stack;  // Declare stack here
     public:
         explicit iterator_preorder(Node<T>* root);
         Node<T>& operator*() const;
@@ -36,7 +38,7 @@ public:
     class const_iterator_preorder {
     private:
         const Node<T>* current;
-
+        std::stack<const Node<T>*> stack;  // Declare stack here
     public:
         explicit const_iterator_preorder(const Node<T>* root);
         const Node<T>& operator*() const;
@@ -51,7 +53,7 @@ public:
     class iterator_postorder {
     private:
         Node<T>* current;
-
+        std::stack<Node<T>*> stack;  // Declare stack here
     public:
         explicit iterator_postorder(Node<T>* root);
         Node<T>& operator*() const;
@@ -66,7 +68,7 @@ public:
     class const_iterator_postorder {
     private:
         const Node<T>* current;
-
+        std::stack<const Node<T>*> stack;  // Declare stack here
     public:
         explicit const_iterator_postorder(const Node<T>* root);
         const Node<T>& operator*() const;
@@ -81,7 +83,7 @@ public:
     class iterator_inorder {
     private:
         Node<T>* current;
-
+        std::stack<Node<T>*> stack;  // Declare stack here
     public:
         explicit iterator_inorder(Node<T>* root);
         Node<T>& operator*() const;
@@ -96,7 +98,7 @@ public:
     class const_iterator_inorder {
     private:
         const Node<T>* current;
-
+        std::stack<const Node<T>*> stack;  // Declare stack here
     public:
         explicit const_iterator_inorder(const Node<T>* root);
         const Node<T>& operator*() const;
@@ -111,9 +113,8 @@ public:
     class iterator_bfs {
     private:
         Node<T>* current;
-		void advance();
-		std::queue<Node<T>*> queue;  // Use a queue to store pointers to nodes
-
+        void advance();
+        std::queue<Node<T>*> queue;  // Use a queue to store pointers to nodes
     public:
         explicit iterator_bfs(Node<T>* root);
         Node<T>& operator*() const;
@@ -124,12 +125,11 @@ public:
         bool operator!=(const iterator_bfs& other) const;
     };
 
-
     // Const BFS iterator
     class const_iterator_bfs {
     private:
         const Node<T>* current;
-
+        std::queue<const Node<T>*> queue;  // Declare queue here
     public:
         explicit const_iterator_bfs(const Node<T>* root);
         const Node<T>& operator*() const;

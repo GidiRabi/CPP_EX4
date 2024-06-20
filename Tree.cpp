@@ -1,5 +1,6 @@
 //Tree.cpp
 #include "Tree.hpp"
+#include "Node.hpp"
 
 template<typename T, int K>
 Tree<T, K>::Tree() {}
@@ -83,27 +84,6 @@ typename Node<T>::const_iterator_postorder Tree<T, K>::cend_post_order() const {
 }
 
 // BFS
-template<typename T, int K>
-typename Node<T>::iterator_bfs begin() {
-    return typename Node<T>::iterator_bfs Tree<T, K>::begin_bfs_scan();
-}
-
-template<typename T, int K>
-typename Node<T>::iterator_bfs end() {
-    return typename Node<T>::iterator_bfs Tree<T, K>::end_bfs_scan();  // End of BFS traversal
-}
-
-template<typename T, int K>
-typename Node<T>::const_iterator_bfs Tree<T, K>::begin() const {
-    return cbegin_bfs();
-}
-
-template<typename T, int K>
-typename Node<T>::const_iterator_bfs Tree<T, K>::end() const {
-    return cend_bfs();
-}
-
-
 template<typename T, int K>
 typename Node<T>::iterator_bfs Tree<T, K>::begin_bfs_scan() {
     return typename Node<T>::iterator_bfs(root.get());

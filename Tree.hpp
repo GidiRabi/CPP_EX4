@@ -18,14 +18,6 @@ public:
     void add_sub_node(Node<T>& parent, Node<T>& child);
 
     // Methods to support range-based for loops
-    typename Node<T>::iterator_bfs begin();
-    typename Node<T>::iterator_bfs end();
-
-    typename Node<T>::const_iterator_bfs begin() const;
-    typename Node<T>::const_iterator_bfs end() const;
-
-	
-
     typename Node<T>::iterator_preorder begin_pre_order(); // Corrected naming
     typename Node<T>::iterator_preorder end_pre_order();   // Corrected naming
     typename Node<T>::const_iterator_preorder cbegin_pre_order() const; // Corrected naming
