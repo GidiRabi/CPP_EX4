@@ -33,25 +33,35 @@ int main()
      *  1.4  1.5  1.6
      */
 
+	cout << "Pre-order traversal, should print 1.1, 1.2, 1.4, 1.5, 1.3, 1.6: \n";
     for (auto node = tree.begin_pre_order(); node != tree.end_pre_order(); ++node)
     {
         cout << node->get_value() << endl;
     } // prints: 1.1, 1.2, 1.4, 1.5, 1.3, 1.6
 
+	cout << "Post-order traversal, should print 1.4, 1.5, 1.2, 1.6, 1.3, 1.1: \n";
     for (auto node = tree.begin_post_order(); node != tree.end_post_order(); ++node)
     {
         cout << node->get_value() << endl;
     } // prints: 1.4, 1.5, 1.2, 1.6, 1.3, 1.1
 
+	cout << "In-order traversal, should print 1.4, 1.2, 1.5, 1.1, 1.6, 1.3: \n";
     for (auto node = tree.begin_in_order(); node != tree.end_in_order(); ++node)
     {
         cout << node->get_value() << endl;
     } // prints: 1.4, 1.2, 1.5, 1.1, 1.6, 1.3
 
+	cout << "BFS traversal, should print 1.1, 1.2, 1.3, 1.4, 1.5, 1.6: \n";
     for (auto node = tree.begin_bfs_scan(); node != tree.end_bfs_scan(); ++node)
     {
         cout << node->get_value() << endl;
     } // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+
+	cout << "DFS traversal, should print ?: \n";
+    for (auto node = tree.begin_dfs_scan(); node != tree.end_dfs_scan(); ++node)
+    {
+        cout << node->get_value() << endl;
+    } // prints: 
 
     // for (auto node : tree)
     // {
@@ -68,6 +78,8 @@ int main()
     three_ary_tree.add_sub_node(n1, n4);
     three_ary_tree.add_sub_node(n2, n5);
 
+	cout << three_ary_tree; // Should print the graph using GUI.
+	
      // The tree should look like:
     /**
      *       root = 1.1
