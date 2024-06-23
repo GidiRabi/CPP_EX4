@@ -2,7 +2,13 @@
 #define TREE_HPP
 
 #include "Node.hpp"
+#include <SFML/Graphics.hpp>
 #include <iostream>
+#include <type_traits>
+#include <string>
+
+using namespace std;
+
 
 template<typename T, int K = 2>
 class Tree {
@@ -15,6 +21,7 @@ public:
     
     void add_root(Node<T>& node);
     void add_sub_node(Node<T>& parent, Node<T>& child);
+	Node<T>* getRoot() const { return root; }
 
     // Pre-order traversal
     typename Node<T>::iterator_preorder begin_pre_order();
@@ -51,7 +58,7 @@ public:
 
     // Print tree
     template<typename U, int M>
-    friend std::ostream& operator<<(std::ostream& os, const Tree<U, M>& tree);
+    friend ostream& operator<<(ostream& os, const Tree<U, M>& tree);
 };
 
 
@@ -196,19 +203,74 @@ typename Node<T>::iterator_heap Tree<T, K>::myHeap() {
     return typename Node<T>::iterator_heap(root);
 }
 
-// Print tree
 template<typename T, int K>
-std::ostream& operator<<(std::ostream& os, const Tree<T, K>& tree) {
-    os << "Tree printing not implemented";
+void drawTree(sf::RenderWindow& window, const Node<T>* node, int x, int y, int horizontalSpacing, int level = 0) {
+    if (!node) return;
+
+    horizontalSpacing /= 2;
+    const int radius = 20;
+    sf::CircleShape circle(radius);
+    circle.setPosition(x - radius, y - radius);
+    circle.setFillColor(sf::Color::Green);
+
+    sf::Font font;
+    if (!font.loadFromFile("Arial.ttf")) {
+        std::cerr << "Could not load font\n";
+        return;
+    }
+
+    sf::Text text;
+    text.setFont(font);
+    // Use if constexpr to check if the type T is std::string and handle accordingly
+    if constexpr (std::is_same_v<T, std::string>) {
+        text.setString(node->get_value()); // Directly use the string
+    } else {
+        text.setString(std::to_string(node->get_value())); // Convert numeric value to string
+    }
+    text.setCharacterSize(15);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(x - radius / 2, y - radius / 2);
+
+    int childX = x - horizontalSpacing;
+    for (const auto& child : node->children) {
+        if (child) {
+            sf::Vertex line[] = {
+                sf::Vertex(sf::Vector2f(x, y + radius)),
+                sf::Vertex(sf::Vector2f(childX, y + 100 - radius))
+            };
+            window.draw(line, 2, sf::Lines);
+            drawTree<T, K>(window, child, childX, y + 100, horizontalSpacing, level + 1);
+            childX += horizontalSpacing * 2;
+        }
+    }
+    window.draw(circle);
+    window.draw(text);
+}
+
+template<typename T, int K>
+ostream& operator<<(ostream& os, const Tree<T, K>& tree) {
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Tree Visualization");
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        // Explicitly pass template arguments
+        drawTree<T, K>(window, tree.getRoot(), 400, 50, 300);
+        window.display();
+    }
     return os;
 }
 
 // Explicit template instantiation
 template class Tree<int>;
 template class Tree<double>;
-template class Tree<std::string>;
-template std::ostream& operator<< <>(std::ostream& os, const Tree<int>& tree);
-template std::ostream& operator<< <>(std::ostream& os, const Tree<double>& tree);
-template std::ostream& operator<< <>(std::ostream& os, const Tree<std::string>& tree);
+template class Tree<string>;
+template ostream& operator<< <>(ostream& os, const Tree<int>& tree);
+template ostream& operator<< <>(ostream& os, const Tree<double>& tree);
+template ostream& operator<< <>(ostream& os, const Tree<string>& tree);
 
 #endif // TREE_HPP

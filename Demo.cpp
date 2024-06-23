@@ -71,6 +71,7 @@ int main()
     cout << tree << endl; // Should print the graph using GUI.
 
     Tree<double,3> three_ary_tree; // 3-ary tree.
+	root_node = Node(17.17);
     three_ary_tree.add_root(root_node);
     three_ary_tree.add_sub_node(root_node, n1);
     three_ary_tree.add_sub_node(root_node, n2);

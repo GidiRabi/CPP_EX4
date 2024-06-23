@@ -1,6 +1,10 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -g
-# LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+# Include directory for SFML headers, adjust if SFML is installed in a non-standard location
+SFML_INCLUDE_DIR = /usr/local/include
+# Library directory for SFML, adjust if your SFML libraries are in a non-standard location
+SFML_LIB_DIR = /usr/local/lib
+LDFLAGS = -L$(SFML_LIB_DIR) -lsfml-graphics -lsfml-window -lsfml-system
 
 # Main targets
 all: tree test
@@ -15,11 +19,11 @@ test: Test.o
 
 # Compile Demo.cpp
 Demo.o: Demo.cpp Node.hpp Tree.hpp
-	$(CXX) $(CXXFLAGS) -c Demo.cpp
+	$(CXX) $(CXXFLAGS) -I$(SFML_INCLUDE_DIR) -c Demo.cpp
 
 # Compile Test.cpp
 Test.o: Test.cpp Node.hpp Tree.hpp
-	$(CXX) $(CXXFLAGS) -c Test.cpp
+	$(CXX) $(CXXFLAGS) -I$(SFML_INCLUDE_DIR) -c Test.cpp
 
 # Clean up build artifacts
 clean:
