@@ -57,7 +57,7 @@ int main()
         cout << node->get_value() << endl;
     } // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
-	cout << "DFS traversal, should print ?: \n";
+	cout << "DFS traversal, should print ___?___: \n";
     for (auto node = tree.begin_dfs_scan(); node != tree.end_dfs_scan(); ++node)
     {
         cout << node->get_value() << endl;
@@ -68,7 +68,7 @@ int main()
     //     cout << node.get_value() << endl;
     // } // same as BFS: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
-    cout << tree; // Should print the graph using GUI.
+    cout << tree << endl; // Should print the graph using GUI.
 
     Tree<double,3> three_ary_tree; // 3-ary tree.
     three_ary_tree.add_root(root_node);
@@ -78,9 +78,9 @@ int main()
     three_ary_tree.add_sub_node(n1, n4);
     three_ary_tree.add_sub_node(n2, n5);
 
-	cout << three_ary_tree; // Should print the graph using GUI.
-	
-     // The tree should look like:
+	cout << three_ary_tree << endl; // Should print the graph using GUI.
+
+    // The tree should look like:
     /**
      *       root = 1.1
      *     /      |     \
