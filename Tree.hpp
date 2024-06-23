@@ -7,42 +7,49 @@
 template<typename T, int K = 2>
 class Tree {
 private:
-    Node<T>* root;  // Use a raw pointer for the root
+    Node<T>* root;
 
 public:
     Tree();
     ~Tree();
-    
+	
     void add_root(Node<T>& node);
     void add_sub_node(Node<T>& parent, Node<T>& child);
 
+	// Pre-order traversal
     typename Node<T>::iterator_preorder begin_pre_order();
     typename Node<T>::iterator_preorder end_pre_order();
     typename Node<T>::const_iterator_preorder cbegin_pre_order() const;
     typename Node<T>::const_iterator_preorder cend_pre_order() const;
 
+	// In-order traversal
     typename Node<T>::iterator_inorder begin_in_order();
     typename Node<T>::iterator_inorder end_in_order();
     typename Node<T>::const_iterator_inorder cbegin_in_order() const;
     typename Node<T>::const_iterator_inorder cend_in_order() const;
 
+	// Post-order traversal
     typename Node<T>::iterator_postorder begin_post_order();
     typename Node<T>::iterator_postorder end_post_order();
     typename Node<T>::const_iterator_postorder cbegin_post_order() const;
     typename Node<T>::const_iterator_postorder cend_post_order() const;
 
+	// BFS traversal
     typename Node<T>::iterator_bfs begin_bfs_scan();
     typename Node<T>::iterator_bfs end_bfs_scan();
     typename Node<T>::const_iterator_bfs cbegin_bfs_scan() const;
     typename Node<T>::const_iterator_bfs cend_bfs_scan() const;
 
+	// DFS traversal
     typename Node<T>::iterator_dfs begin_dfs_scan();
     typename Node<T>::iterator_dfs end_dfs_scan();
     typename Node<T>::const_iterator_dfs cbegin_dfs_scan() const;
     typename Node<T>::const_iterator_dfs cend_dfs_scan() const;
 
+	// Heap (Min-Heap) traversal
     typename Node<T>::iterator_heap myHeap();
 
+	// Print tree
     template<typename U, int M>
     friend std::ostream& operator<<(std::ostream& os, const Tree<U, M>& tree);
 };
