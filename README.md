@@ -1,39 +1,58 @@
-# Tree Implementation
+# Tree Implementation Project
 
-This project implements a generic tree class in C++ that can handle keys of any type (e.g., numbers, strings, and classes). The tree supports various traversal methods, including Pre-Order, Post-Order, In-Order, BFS, and DFS.
+## Overview
+
+This project offers a versatile k-ary tree data structure capable of handling diverse data types such as integers, strings, and user-defined classes (e.g., complex numbers). It's designed to facilitate a wide range of operations, including several traversal strategies.
 
 ## Class Hierarchy
 
-- `Node<T>`: Represents a node in the tree.
-- `Tree<T>`: Represents the tree structure and provides methods for adding nodes and traversing the tree.
+- **Node<T>**: A generic node capable of storing values and managing a list of child nodes.
+- **Tree<T, K=2>**: A generic tree structure that supports multiple traversal methods and can be configured as a k-ary tree.
 
-## Methods
+## Key Features
 
-### Node Class
-- `Node(T val)`: Constructor to initialize a node with a value.
-- `T get_value() const`: Returns the value of the node.
-- `void set_value(T val)`: Sets the value of the node.
-- `std::vector<Node<T>*> get_children() const`: Returns the children of the node.
-- `void add_child(Node<T>* child)`: Adds a child to the node.
-- `~Node()`: Destructor to delete all child nodes.
+### Node Operations
+- **Constructor**: Initializes a node with a given value.
+- **getValue()**: Retrieves the node's value.
+- **setValue()**: Sets the node's value.
+- **addChild()**: Adds a child to the node.
+- **getChildren()**: Returns a list of child nodes.
+- **Destructor**: Recursively deletes the node and its children to prevent memory leaks.
 
-### Tree Class
-- `Tree()`: Constructor to initialize the tree.
-- `void add_root(T value)`: Adds the root node to the tree.
-- `void add_sub_node(T parent_value, T child_value)`: Adds a child node to a parent node.
-- `Node<T>* find(Node<T>* node, T value)`: Finds a node with the given value.
-- `std::vector<Node<T>*> begin_pre_order() const`: Returns nodes in Pre-Order traversal.
-- `std::vector<Node<T>*> begin_post_order() const`: Returns nodes in Post-Order traversal.
-- `std::vector<Node<T>*> begin_in_order() const`: Returns nodes in In-Order traversal.
-- `std::vector<Node<T>*> begin_bfs_scan() const`: Returns nodes in BFS traversal.
-- `std::vector<Node<T>*> begin_dfs_scan() const`: Returns nodes in DFS traversal.
-- `~Tree()`: Destructor to delete the tree.
+### Tree Operations
+- **Constructor**: Establishes an empty tree.
+- **addRoot()**: Sets the root of the tree.
+- **addSubNode()**: Attaches a new node under a specified parent node.
+- **find()**: Searches for a node with a specified value starting from a given node.
+- **begin/end_pre_order()**: Iterator for Pre-Order traversal.
+- **begin/end_post_order()**: Iterator for Post-Order traversal.
+- **begin/end_in_order()**: Iterator for In-Order traversal (binary trees only).
+- **begin/end_bfs_scan()**: Iterator for Breadth-First Search traversal.
+- **begin/end_dfs_scan()**: Iterator for Depth-First Search traversal.
+- **myHeap()**: Converts the binary tree to a minimum heap and provides an iterator.
+- **Destructor**: Safely deletes all nodes in the tree.
 
-## Libraries Used
-- C++ Standard Library
+## Additional Components
 
-## Compilation
-To compile the project, run the following command:
+- **Complex**: A class to handle complex numbers, demonstrating the tree's ability to manage custom objects.
 
-## Author
-Gidi Rabi
+## GUI Representation
+
+The project includes a GUI representation for the tree, using the SFML library to visualize the tree structure dynamically. This is particularly useful for educational purposes and in-depth analysis of tree behaviors.
+
+## Dependencies
+
+- **C++ Standard Library**
+- **SFML**: Used for GUI representation of the tree.
+
+## Building and Running
+
+To build and run the main application and tests run:
+```bash
+make all
+./tree
+./test
+```
+
+### Author
+Gidi Rabi - gidirabi111@gmail.com
