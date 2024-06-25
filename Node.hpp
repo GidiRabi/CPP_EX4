@@ -9,8 +9,8 @@
 template<typename T>
 class Node {
 public:
-    T data;
-    std::vector<Node<T>*> children;
+    T data; // The data stored in the node.
+    std::vector<Node<T>*> children; // The children nodes of this node.
 
     Node(const T& data);
     Node(const Node& other); // Copy constructor
