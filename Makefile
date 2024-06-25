@@ -10,17 +10,17 @@ LDFLAGS = -L$(SFML_LIB_DIR) -lsfml-graphics -lsfml-window -lsfml-system
 # Main targets
 all: tree test
 
-# Build the main demo executable
-tree: Demo.o
-	$(CXX) $(CXXFLAGS) -o tree Demo.o $(LDFLAGS)
+# Build the main executable
+tree: Main.o
+	$(CXX) $(CXXFLAGS) -o tree Main.o $(LDFLAGS)
 
 # Build the test executable
 test: Test.o
 	$(CXX) $(CXXFLAGS) -o test Test.o $(LDFLAGS)
 
-# Compile Demo.cpp
-Demo.o: Demo.cpp Node.hpp Tree.hpp
-	$(CXX) $(CXXFLAGS) -I$(SFML_INCLUDE_DIR) -c Demo.cpp
+# Compile Main.cpp
+Main.o: Main.cpp Node.hpp Tree.hpp
+	$(CXX) $(CXXFLAGS) -I$(SFML_INCLUDE_DIR) -c Main.cpp
 
 # Compile Test.cpp
 Test.o: Test.cpp Node.hpp Tree.hpp
