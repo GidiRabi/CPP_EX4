@@ -10,7 +10,7 @@ TEST_CASE("Test adding root node") {
     Node<int> root_node(42);
     Tree<int> tree;
     tree.add_root(root_node);
-    CHECK(tree.begin_bfs_scan()->get_value() == 42);
+    CHECK(tree.begin_bfs()->get_value() == 42);
 }
 
 TEST_CASE("Test adding child nodes") {
@@ -21,7 +21,7 @@ TEST_CASE("Test adding child nodes") {
     Node<int> n2(29);
     tree.add_sub_node(root_node, n1);
     tree.add_sub_node(root_node, n2);
-    auto it = tree.begin_bfs_scan();
+    auto it = tree.begin_bfs();
     CHECK(it->get_value() == 13);
     ++it;
     CHECK(it->get_value() == -7);
@@ -114,7 +114,7 @@ TEST_CASE("Test BFS traversal") {
     tree.add_sub_node(n2, n5);
 
     vector<int> values;
-    for (auto node = tree.begin_bfs_scan(); node != tree.end_bfs_scan(); ++node) {
+    for (auto node = tree.begin_bfs(); node != tree.end_bfs(); ++node) {
         values.push_back(node->get_value());
     }
 
@@ -137,7 +137,7 @@ TEST_CASE("Test DFS traversal") {
     tree.add_sub_node(n2, n5);
 
     vector<int> values;
-    for (auto node = tree.begin_dfs_scan(); node != tree.end_dfs_scan(); ++node) {
+    for (auto node = tree.begin_dfs(); node != tree.end_dfs(); ++node) {
         values.push_back(node->get_value());
     }
 
@@ -161,7 +161,7 @@ TEST_CASE("Test 3-ary tree structure") {
     tree.add_sub_node(n2, n5);
 
     vector<int> values;
-    for (auto node = tree.begin_bfs_scan(); node != tree.end_bfs_scan(); ++node) {
+    for (auto node = tree.begin_bfs(); node != tree.end_bfs(); ++node) {
         values.push_back(node->get_value());
     }
 
@@ -184,7 +184,7 @@ TEST_CASE("Test different tree data type") {
     tree.add_sub_node(n2, n5);
 
     vector<string> values;
-    for (auto node = tree.begin_bfs_scan(); node != tree.end_bfs_scan(); ++node) {
+    for (auto node = tree.begin_bfs(); node != tree.end_bfs(); ++node) {
         values.push_back(node->get_value());
     }
 

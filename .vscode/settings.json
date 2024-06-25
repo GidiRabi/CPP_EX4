@@ -82,5 +82,6 @@
 		"text_encoding": "cpp",
 		"thread": "cpp",
 		"cinttypes": "cpp"
-	}
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

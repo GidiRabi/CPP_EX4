@@ -12,7 +12,7 @@ public:
     T data;
     std::vector<Node<T>*> children;
 
-    explicit Node(const T& data);
+    Node(const T& data);
     Node(const Node& other); // Copy constructor
     Node& operator=(const Node<T>& other); // Copy assignment operator
     ~Node();
@@ -25,7 +25,7 @@ public:
         Node<T>* current;
         std::stack<Node<T>*> stack;
     public:
-        explicit iterator_preorder(Node<T>* root);
+        iterator_preorder(Node<T>* root);
         Node<T>& operator*() const;
         Node<T>* operator->() const;
         iterator_preorder& operator++();
@@ -40,7 +40,7 @@ public:
         const Node<T>* current;
         std::stack<const Node<T>*> stack;
     public:
-        explicit const_iterator_preorder(const Node<T>* root);
+        const_iterator_preorder(const Node<T>* root);
         const Node<T>& operator*() const;
         const Node<T>* operator->() const;
         const_iterator_preorder& operator++();
@@ -55,7 +55,7 @@ public:
         Node<T>* current;
         std::stack<Node<T>*> stack;
     public:
-        explicit iterator_postorder(Node<T>* root);
+        iterator_postorder(Node<T>* root);
         Node<T>& operator*() const;
         Node<T>* operator->() const;
         iterator_postorder& operator++();
@@ -70,7 +70,7 @@ public:
         const Node<T>* current;
         std::stack<const Node<T>*> stack;
     public:
-        explicit const_iterator_postorder(const Node<T>* root);
+        const_iterator_postorder(const Node<T>* root);
         const Node<T>& operator*() const;
         const Node<T>* operator->() const;
         const_iterator_postorder& operator++();
@@ -85,7 +85,7 @@ public:
         Node<T>* current;
         std::stack<Node<T>*> stack;
     public:
-        explicit iterator_inorder(Node<T>* root);
+        iterator_inorder(Node<T>* root);
         Node<T>& operator*() const;
         Node<T>* operator->() const;
         iterator_inorder& operator++();
@@ -100,7 +100,7 @@ public:
         const Node<T>* current;
         std::stack<const Node<T>*> stack;
     public:
-        explicit const_iterator_inorder(const Node<T>* root);
+        const_iterator_inorder(const Node<T>* root);
         const Node<T>& operator*() const;
         const Node<T>* operator->() const;
         const_iterator_inorder& operator++();
@@ -115,7 +115,7 @@ public:
         Node<T>* current;
         std::queue<Node<T>*> queue;
     public:
-        explicit iterator_bfs(Node<T>* root);
+        iterator_bfs(Node<T>* root);
         Node<T>& operator*() const;
         Node<T>* operator->() const;
         iterator_bfs& operator++();
@@ -130,7 +130,7 @@ public:
         const Node<T>* current;
         std::queue<const Node<T>*> queue;
     public:
-        explicit const_iterator_bfs(const Node<T>* root);
+        const_iterator_bfs(const Node<T>* root);
         const Node<T>& operator*() const;
         const Node<T>* operator->() const;
         const_iterator_bfs& operator++();
@@ -145,7 +145,7 @@ public:
         Node<T>* current;
         std::stack<Node<T>*> stack;
     public:
-        explicit iterator_dfs(Node<T>* root);
+        iterator_dfs(Node<T>* root);
         Node<T>& operator*() const;
         Node<T>* operator->() const;
         iterator_dfs& operator++();
@@ -160,7 +160,7 @@ public:
         const Node<T>* current;
         std::stack<const Node<T>*> stack;
     public:
-        explicit const_iterator_dfs(const Node<T>* root);
+        const_iterator_dfs(const Node<T>* root);
         const Node<T>& operator*() const;
         const Node<T>* operator->() const;
         const_iterator_dfs& operator++();
@@ -176,7 +176,7 @@ public:
         std::vector<Node<T>*> heap;
         void build_heap(Node<T>* root);
     public:
-        explicit iterator_heap(Node<T>* root);
+        iterator_heap(Node<T>* root);
         Node<T>& operator*() const;
         Node<T>* operator->() const;
         iterator_heap& operator++();
@@ -192,7 +192,7 @@ public:
         std::vector<const Node<T>*> heap;
         void build_heap(const Node<T>* root);
     public:
-        explicit const_iterator_heap(const Node<T>* root);
+        const_iterator_heap(const Node<T>* root);
         const Node<T>& operator*() const;
         const Node<T>* operator->() const;
         const_iterator_heap& operator++();

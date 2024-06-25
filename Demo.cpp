@@ -36,37 +36,51 @@ int main()
 	cout << "Pre-order traversal, should print 1.1, 1.2, 1.4, 1.5, 1.3, 1.6: \n";
     for (auto node = tree.begin_pre_order(); node != tree.end_pre_order(); ++node)
     {
-        cout << node->get_value() << endl;
+        cout << node->get_value() << ", ";
     } // prints: 1.1, 1.2, 1.4, 1.5, 1.3, 1.6
 
+	cout << endl;
 	cout << "Post-order traversal, should print 1.4, 1.5, 1.2, 1.6, 1.3, 1.1: \n";
     for (auto node = tree.begin_post_order(); node != tree.end_post_order(); ++node)
     {
-        cout << node->get_value() << endl;
+        cout << node->get_value() << ", ";
     } // prints: 1.4, 1.5, 1.2, 1.6, 1.3, 1.1
+	cout << endl;
 
 	cout << "In-order traversal, should print 1.4, 1.2, 1.5, 1.1, 1.6, 1.3: \n";
     for (auto node = tree.begin_in_order(); node != tree.end_in_order(); ++node)
     {
-        cout << node->get_value() << endl;
+        cout << node->get_value() << ", ";
     } // prints: 1.4, 1.2, 1.5, 1.1, 1.6, 1.3
+	cout << endl;
 
 	cout << "BFS traversal, should print 1.1, 1.2, 1.3, 1.4, 1.5, 1.6: \n";
-    for (auto node = tree.begin_bfs_scan(); node != tree.end_bfs_scan(); ++node)
+    for (auto node = tree.begin_bfs(); node != tree.end_bfs(); ++node)
     {
-        cout << node->get_value() << endl;
+        cout << node->get_value() << ", ";
     } // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+	cout << endl;
 
-	cout << "DFS traversal, should print ___?___: \n";
-    for (auto node = tree.begin_dfs_scan(); node != tree.end_dfs_scan(); ++node)
+	cout << "DFS traversal, should print 1.1, 1.2, 1.4, 1.5, 1.3, 1.6: \n";
+    for (auto node = tree.begin_dfs(); node != tree.end_dfs(); ++node)
     {
-        cout << node->get_value() << endl;
-    } // prints: 
+        cout << node->get_value() << ", ";
+    } // prints: 1.1, 1.2, 1.4, 1.5, 1.3, 1.6 
+	cout << endl;
+	
+	cout << "Heap traversal, should print : \n";
+    for (auto node = tree.begin_heap(); node != tree.end_heap(); ++node)
+    {
+        cout << node->get_value() << ", ";
+    }
+    cout << endl;
 
-    // for (auto node : tree)
-    // {
-    //     cout << node.get_value() << endl;
-    // } // same as BFS: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+	cout << "(BFS) traversal, should print 1.1, 1.2, 1.3, 1.4, 1.5, 1.6: \n";
+    for (auto node : tree)
+    {
+        cout << node.get_value() << ", ";
+    } // same as BFS: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+	cout << endl;
 
     cout << tree << endl; // Should print the graph using GUI.
 
@@ -89,5 +103,6 @@ int main()
      *   /        |
      *  1.5      1.6
      */
-    
+
+
 }
