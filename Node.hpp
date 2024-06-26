@@ -26,8 +26,8 @@ public:
         std::stack<Node<T>*> stack;
     public:
         iterator_preorder(Node<T>* root);
-        Node<T>& operator*() const;
-        Node<T>* operator->() const;
+        Node<T>& operator*();
+        Node<T>* operator->();
         iterator_preorder& operator++();
         iterator_preorder operator++(int);
         bool operator==(const iterator_preorder& other) const;
@@ -56,8 +56,8 @@ public:
         std::stack<Node<T>*> stack;
     public:
         iterator_postorder(Node<T>* root);
-        Node<T>& operator*() const;
-        Node<T>* operator->() const;
+        Node<T>& operator*();
+        Node<T>* operator->();
         iterator_postorder& operator++();
         iterator_postorder operator++(int);
         bool operator==(const iterator_postorder& other) const;
@@ -86,8 +86,8 @@ public:
         std::stack<Node<T>*> stack;
     public:
         iterator_inorder(Node<T>* root);
-        Node<T>& operator*() const;
-        Node<T>* operator->() const;
+        Node<T>& operator*();
+        Node<T>* operator->();
         iterator_inorder& operator++();
         iterator_inorder operator++(int);
         bool operator==(const iterator_inorder& other) const;
@@ -116,8 +116,8 @@ public:
         std::queue<Node<T>*> queue;
     public:
         iterator_bfs(Node<T>* root);
-        Node<T>& operator*() const;
-        Node<T>* operator->() const;
+        Node<T>& operator*();
+        Node<T>* operator->();
         iterator_bfs& operator++();
         iterator_bfs operator++(int);
         bool operator==(const iterator_bfs& other) const;
@@ -146,8 +146,8 @@ public:
         std::stack<Node<T>*> stack;
     public:
         iterator_dfs(Node<T>* root);
-        Node<T>& operator*() const;
-        Node<T>* operator->() const;
+        Node<T>& operator*();
+        Node<T>* operator->();
         iterator_dfs& operator++();
         iterator_dfs operator++(int);
         bool operator==(const iterator_dfs& other) const;
@@ -177,8 +177,8 @@ public:
         void build_heap(Node<T>* root);
     public:
         iterator_heap(Node<T>* root);
-        Node<T>& operator*() const;
-        Node<T>* operator->() const;
+        Node<T>& operator*();
+        Node<T>* operator->();
         iterator_heap& operator++();
         iterator_heap operator++(int);
         bool operator==(const iterator_heap& other) const;
@@ -258,12 +258,12 @@ Node<T>::iterator_preorder::iterator_preorder(Node<T>* root) {
 }
 
 template<typename T>
-Node<T>& Node<T>::iterator_preorder::operator*() const {
+Node<T>& Node<T>::iterator_preorder::operator*() {
     return *current;
 }
 
 template<typename T>
-Node<T>* Node<T>::iterator_preorder::operator->() const {
+Node<T>* Node<T>::iterator_preorder::operator->() {
     return current;
 }
 
@@ -363,12 +363,12 @@ Node<T>::iterator_inorder::iterator_inorder(Node<T>* root) {
 }
 
 template<typename T>
-Node<T>& Node<T>::iterator_inorder::operator*() const {
+Node<T>& Node<T>::iterator_inorder::operator*() {
     return *current;
 }
 
 template<typename T>
-Node<T>* Node<T>::iterator_inorder::operator->() const {
+Node<T>* Node<T>::iterator_inorder::operator->() {
     return current;
 }
 
@@ -486,12 +486,12 @@ Node<T>::iterator_postorder::iterator_postorder(Node<T>* root) {
 }
 
 template<typename T>
-Node<T>& Node<T>::iterator_postorder::operator*() const {
+Node<T>& Node<T>::iterator_postorder::operator*() {
     return *current;
 }
 
 template<typename T>
-Node<T>* Node<T>::iterator_postorder::operator->() const {
+Node<T>* Node<T>::iterator_postorder::operator->() {
     return current;
 }
 
@@ -591,12 +591,12 @@ Node<T>::iterator_bfs::iterator_bfs(Node<T>* root) {
 }
 
 template<typename T>
-Node<T>& Node<T>::iterator_bfs::operator*() const {
+Node<T>& Node<T>::iterator_bfs::operator*() {
     return *current;
 }
 
 template<typename T>
-Node<T>* Node<T>::iterator_bfs::operator->() const {
+Node<T>* Node<T>::iterator_bfs::operator->() {
     return current;
 }
 
@@ -693,12 +693,12 @@ Node<T>::iterator_dfs::iterator_dfs(Node<T>* root) {
 }
 
 template<typename T>
-Node<T>& Node<T>::iterator_dfs::operator*() const {
+Node<T>& Node<T>::iterator_dfs::operator*() {
     return *current;
 }
 
 template<typename T>
-Node<T>* Node<T>::iterator_dfs::operator->() const {
+Node<T>* Node<T>::iterator_dfs::operator->() {
     return current;
 }
 
@@ -802,12 +802,12 @@ void Node<T>::iterator_heap::build_heap(Node<T>* root) {
 }
 
 template<typename T>
-Node<T>& Node<T>::iterator_heap::operator*() const {
+Node<T>& Node<T>::iterator_heap::operator*() {
     return *current;
 }
 
 template<typename T>
-Node<T>* Node<T>::iterator_heap::operator->() const {
+Node<T>* Node<T>::iterator_heap::operator->() {
     return current;
 }
 
