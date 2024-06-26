@@ -28,8 +28,7 @@ This project offers a versatile k-ary tree data structure capable of handling di
 - **begin/end_post_order()**: Iterator for Post-Order traversal.
 - **begin/end_in_order()**: Iterator for In-Order traversal (binary trees only).
 - **begin/end_bfs_scan()**: Iterator for Breadth-First Search traversal.
-- **begin/end_dfs_scan()**: Iterator for Depth-First Search traversal.
-- **myHeap()**: Converts the binary tree to a minimum heap and provides an iterator.
+- **buildHeap()**: Converts the binary tree to a minimum heap and provides an iterator.
 - **Destructor**: Safely deletes all nodes in the tree.
 
 ## Additional Components
