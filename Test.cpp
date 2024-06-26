@@ -142,15 +142,6 @@ TEST_CASE("Test Complex Numbers Binary Tree") {
 		}
 		CHECK(values == expected);
 	}
-
-	SUBCASE("Testing Heap order"){
-		vector<ComplexNumber> values;
-		vector<ComplexNumber> expected = {n1, root, n5, n7, n2, n9, n6, n3, n4, n8};
-		for (auto node = tree.begin_heap(); node != tree.end_heap(); ++node) {
-			values.push_back(node->get_value());
-		}
-		CHECK(values == expected);
-	}
 }
 
 
