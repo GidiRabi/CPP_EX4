@@ -816,19 +816,33 @@ Node<T>* Node<T>::iterator_heap::operator->() {
 
 template<typename T>
 typename Node<T>::iterator_heap& Node<T>::iterator_heap::operator++() {
+    // Check if the heap is empty. If it is, set the current pointer to nullptr indicating the end of the iteration, and return this iterator.
     if (heap.empty()) {
         current = nullptr;
         return *this;
     }
+
+    // Reorganize the elements in the heap to maintain the heap property after the root has been removed.
+    // The custom comparator lambda function specifies that the heap is organized as a max-heap.
+    // This moves the largest element to the end of the container, preparing it to be popped.
     pop_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; });
+
+    // Remove the last element of the heap, which is the largest element, after it has been moved to the back by pop_heap.
     heap.pop_back();
+
+    // After removing the largest element, check if the heap is not empty.
+    // If it is not empty, update current to the new root of the heap (the largest remaining element).
+    // If it is empty, set current to nullptr to indicate that the iteration is complete.
     if (!heap.empty()) {
         current = heap.front();
     } else {
         current = nullptr;
     }
+
+    // Return a reference to this iterator, allowing chaining of operations and/or assignments.
     return *this;
 }
+
 
 template<typename T>
 typename Node<T>::iterator_heap Node<T>::iterator_heap::operator++(int) {
