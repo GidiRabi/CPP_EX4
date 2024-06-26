@@ -34,7 +34,7 @@ This project offers a versatile k-ary tree data structure capable of handling di
 
 ## Additional Components
 
-- **Complex**: A class to handle complex numbers, demonstrating the tree's ability to manage custom objects.
+- **ComplexNumber**: A class to handle complex numbers, demonstrating the tree's ability to manage custom objects.
 
 ## GUI Representation
 

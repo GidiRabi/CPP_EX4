@@ -86,9 +86,7 @@ int main()
 
     cout << three_ary_tree_str << endl; // Should print the graph using GUI.
 
-    // Demo with ComplexNumber
-    cout << "ComplexNumber Tree Demo:\n";
-
+    // Complex number tree.
     ComplexNumber root_num(1.1, 2.2);
     Node<ComplexNumber> root_node_complex(root_num);
     Tree<ComplexNumber> tree_complex; // Binary tree that contains complex numbers.

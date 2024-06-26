@@ -521,7 +521,10 @@ void drawTree(sf::RenderWindow& window, const Node<T>* node, int x, int y, int t
     sf::CircleShape circle(radius);
     circle.setPosition(x - radius, y - radius);
     circle.setFillColor(sf::Color::Green);
+	circle.setOutlineColor(sf::Color::White);
+	circle.setOutlineThickness(2);
 
+	
     sf::Font font;
     if (!font.loadFromFile("Arial.ttf")) {
         std::cerr << "Could not load font\n";
@@ -546,12 +549,13 @@ void drawTree(sf::RenderWindow& window, const Node<T>* node, int x, int y, int t
 
     for (const auto& child : node->children) {
         if (child) {
-            int subtreeWidth = getTreeWidth(child) * (800 / (K + 1));
+            int subtreeWidth = getTreeWidth(child) * (500 / (K + 1));
+			
             int childPosX = childX + subtreeWidth / 2;
 
             sf::Vertex line[] = {
-                sf::Vertex(sf::Vector2f(x, y + radius)),
-                sf::Vertex(sf::Vector2f(childPosX, y + 100 - radius))
+                sf::Vertex(sf::Vector2f(x, y + radius), sf::Color::Red),
+                sf::Vertex(sf::Vector2f(childPosX, y + 100 - radius), sf::Color::Red)
             };
             window.draw(line, 2, sf::Lines);
             drawTree<T, K>(window, child, childPosX, y + 100, subtreeWidth);
@@ -580,13 +584,5 @@ ostream& operator<<(ostream& os, const Tree<T, K>& tree) {
 
     return os;
 }
-
-// Explicit template instantiation
-// template class Tree<int>;
-// template class Tree<double>;
-// template class Tree<string>;
-// template ostream& operator<< <>(ostream& os, const Tree<int>& tree);
-// template ostream& operator<< <>(ostream& os, const Tree<double>& tree);
-// template ostream& operator<< <>(ostream& os, const Tree<string>& tree);
 
 #endif // TREE_HPP

@@ -789,6 +789,10 @@ bool Node<T>::const_iterator_dfs::operator!=(const const_iterator_dfs& other) co
 template<typename T>
 Node<T>::iterator_heap::iterator_heap(Node<T>* root) : current(nullptr) {
     build_heap(root);
+    if (!heap.empty()) {
+        make_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; });
+        current = heap.front();
+    }
 }
 
 template<typename T>
@@ -798,7 +802,6 @@ void Node<T>::iterator_heap::build_heap(Node<T>* root) {
     for (Node<T>* child : root->children) {
         build_heap(child);
     }
-    std::make_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; });
 }
 
 template<typename T>
@@ -813,16 +816,19 @@ Node<T>* Node<T>::iterator_heap::operator->() {
 
 template<typename T>
 typename Node<T>::iterator_heap& Node<T>::iterator_heap::operator++() {
-    if (heap.empty()) { // Check if the heap is empty
-        current = nullptr; // If empty, set current to nullptr
-        return *this; // Return this instance of iterator
+    if (heap.empty()) {
+        current = nullptr;
+        return *this;
     }
-    std::pop_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; }); // Re-adjust the heap
-    current = heap.back(); // Set current to the last element of the heap
-    heap.pop_back(); // Remove the last element from the heap
-    return *this; // Return this instance of iterator
+    pop_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; });
+    heap.pop_back();
+    if (!heap.empty()) {
+        current = heap.front();
+    } else {
+        current = nullptr;
+    }
+    return *this;
 }
-
 
 template<typename T>
 typename Node<T>::iterator_heap Node<T>::iterator_heap::operator++(int) {
@@ -833,18 +839,22 @@ typename Node<T>::iterator_heap Node<T>::iterator_heap::operator++(int) {
 
 template<typename T>
 bool Node<T>::iterator_heap::operator==(const iterator_heap& other) const {
-    return current == other.current;
+    return current == other.current && heap.size() == other.heap.size();
 }
 
 template<typename T>
 bool Node<T>::iterator_heap::operator!=(const iterator_heap& other) const {
-    return current != other.current;
+    return !(*this == other);
 }
 
 // ----- Const Heap Iterator Definitions -----
 template<typename T>
 Node<T>::const_iterator_heap::const_iterator_heap(const Node<T>* root) : current(nullptr) {
     build_heap(root);
+    if (!heap.empty()) {
+        make_heap(heap.begin(), heap.end(), [](const Node<T>* a, const Node<T>* b) { return a->data > b->data; });
+        current = heap.front();
+    }
 }
 
 template<typename T>
@@ -854,7 +864,6 @@ void Node<T>::const_iterator_heap::build_heap(const Node<T>* root) {
     for (const Node<T>* child : root->children) {
         build_heap(child);
     }
-    std::make_heap(heap.begin(), heap.end(), [](const Node<T>* a, const Node<T>* b) { return a->data > b->data; });
 }
 
 template<typename T>
@@ -873,9 +882,13 @@ typename Node<T>::const_iterator_heap& Node<T>::const_iterator_heap::operator++(
         current = nullptr;
         return *this;
     }
-    std::pop_heap(heap.begin(), heap.end(), [](const Node<T>* a, const Node<T>* b) { return a->data > b->data; });
-    current = heap.back();
+    pop_heap(heap.begin(), heap.end(), [](const Node<T>* a, const Node<T>* b) { return a->data > b->data; });
     heap.pop_back();
+    if (!heap.empty()) {
+        current = heap.front();
+    } else {
+        current = nullptr;
+    }
     return *this;
 }
 
@@ -888,12 +901,12 @@ typename Node<T>::const_iterator_heap Node<T>::const_iterator_heap::operator++(i
 
 template<typename T>
 bool Node<T>::const_iterator_heap::operator==(const const_iterator_heap& other) const {
-    return current == other.current;
+    return current == other.current && heap.size() == other.heap.size();
 }
 
 template<typename T>
 bool Node<T>::const_iterator_heap::operator!=(const const_iterator_heap& other) const {
-    return current != other.current;
+    return !(*this == other);
 }
 
 // Explicit template instantiation for types
