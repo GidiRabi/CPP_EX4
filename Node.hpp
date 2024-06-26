@@ -269,18 +269,19 @@ Node<T>* Node<T>::iterator_preorder::operator->() const {
 
 template<typename T>
 typename Node<T>::iterator_preorder& Node<T>::iterator_preorder::operator++() {
-    if (this->stack.empty()) {
-        current = nullptr;
-        return *this;
+    if (this->stack.empty()) { // Check if the stack is empty
+        current = nullptr; // If empty, set current to nullptr
+        return *this; // Return this instance of iterator
     }
-    Node<T>* node = this->stack.top();
-    this->stack.pop();
-    for (auto it = node->children.rbegin(); it != node->children.rend(); ++it) {
-        this->stack.push(*it);
+    Node<T>* node = this->stack.top(); // Get the top node from the stack
+    this->stack.pop(); // Remove the top node from the stack
+    for (auto it = node->children.rbegin(); it != node->children.rend(); ++it) { // Iterate over children in reverse order
+        this->stack.push(*it); // Push each child to the stack
     }
-    current = (this->stack.empty() ? nullptr : this->stack.top());
-    return *this;
+    current = (this->stack.empty() ? nullptr : this->stack.top()); // Update current to the new top of the stack
+    return *this; // Return this instance of iterator
 }
+
 
 template<typename T>
 typename Node<T>::iterator_preorder Node<T>::iterator_preorder::operator++(int) {
@@ -373,22 +374,23 @@ Node<T>* Node<T>::iterator_inorder::operator->() const {
 
 template<typename T>
 typename Node<T>::iterator_inorder& Node<T>::iterator_inorder::operator++() {
-    if (this->stack.empty()) {
-        current = nullptr;
-        return *this;
+    if (this->stack.empty()) { // Check if the stack is empty
+        current = nullptr; // If empty, set current to nullptr
+        return *this; // Return this instance of iterator
     }
-    Node<T>* node = this->stack.top();
-    this->stack.pop();
-    if (node->children.size() > 1) {
-        node = node->children[1];
-        while (node) {
-            this->stack.push(node);
-            node = (node->children.empty() ? nullptr : node->children.front());
+    Node<T>* node = this->stack.top(); // Get the top node from the stack
+    this->stack.pop(); // Remove the top node from the stack
+    if (node->children.size() > 1) { // Check if there is a right child
+        node = node->children[1]; // Move to the right child
+        while (node) { // Go left down the tree
+            this->stack.push(node); // Push each node to the stack
+            node = (node->children.empty() ? nullptr : node->children.front()); // Move to the leftmost child
         }
     }
-    current = (this->stack.empty() ? nullptr : this->stack.top());
-    return *this;
+    current = (this->stack.empty() ? nullptr : this->stack.top()); // Update current to the new top of the stack
+    return *this; // Return this instance of iterator
 }
+
 
 template<typename T>
 typename Node<T>::iterator_inorder Node<T>::iterator_inorder::operator++(int) {
@@ -495,13 +497,13 @@ Node<T>* Node<T>::iterator_postorder::operator->() const {
 
 template<typename T>
 typename Node<T>::iterator_postorder& Node<T>::iterator_postorder::operator++() {
-    if (stack.empty()) {
-        current = nullptr;
+    if (stack.empty()) { // Check if the stack is empty
+        current = nullptr; // If empty, set current to nullptr
     } else {
-        stack.pop();
-        current = stack.empty() ? nullptr : stack.top();
+        stack.pop(); // Pop the top node from the stack
+        current = stack.empty() ? nullptr : stack.top(); // Update current to the new top of the stack
     }
-    return *this;
+    return *this; // Return this instance of iterator
 }
 
 template<typename T>
@@ -600,17 +602,17 @@ Node<T>* Node<T>::iterator_bfs::operator->() const {
 
 template<typename T>
 typename Node<T>::iterator_bfs& Node<T>::iterator_bfs::operator++() {
-    if (this->queue.empty()) {
-        current = nullptr;
-        return *this;
+    if (this->queue.empty()) { // Check if the queue is empty
+        current = nullptr; // If empty, set current to nullptr
+        return *this; // Return this instance of iterator
     }
-    Node<T>* node = this->queue.front();
-    this->queue.pop();
-    for (auto& child : node->children) {
-        this->queue.push(child);
+    Node<T>* node = this->queue.front(); // Get the front node from the queue
+    this->queue.pop(); // Remove the front node from the queue
+    for (auto& child : node->children) { // Iterate over children
+        this->queue.push(child); // Push each child to the queue
     }
-    current = (this->queue.empty() ? nullptr : this->queue.front());
-    return *this;
+    current = (this->queue.empty() ? nullptr : this->queue.front()); // Update current to the new front of the queue
+    return *this; // Return this instance of iterator
 }
 
 template<typename T>
@@ -702,17 +704,17 @@ Node<T>* Node<T>::iterator_dfs::operator->() const {
 
 template<typename T>
 typename Node<T>::iterator_dfs& Node<T>::iterator_dfs::operator++() {
-    if (this->stack.empty()) {
-        current = nullptr;
-        return *this;
+    if (this->stack.empty()) { // Check if the stack is empty
+        current = nullptr; // If empty, set current to nullptr
+        return *this; // Return this instance of iterator
     }
-    Node<T>* node = this->stack.top();
-    this->stack.pop();
-    for (auto it = node->children.rbegin(); it != node->children.rend(); ++it) {
-        this->stack.push(*it);
+    Node<T>* node = this->stack.top(); // Get the top node from the stack
+    this->stack.pop(); // Remove the top node from the stack
+    for (auto it = node->children.rbegin(); it != node->children.rend(); ++it) { // Iterate over children in reverse order
+        this->stack.push(*it); // Push each child to the stack
     }
-    current = (this->stack.empty() ? nullptr : this->stack.top());
-    return *this;
+    current = (this->stack.empty() ? nullptr : this->stack.top()); // Update current to the new top of the stack
+    return *this; // Return this instance of iterator
 }
 
 template<typename T>
@@ -811,15 +813,16 @@ Node<T>* Node<T>::iterator_heap::operator->() const {
 
 template<typename T>
 typename Node<T>::iterator_heap& Node<T>::iterator_heap::operator++() {
-    if (heap.empty()) {
-        current = nullptr;
-        return *this;
+    if (heap.empty()) { // Check if the heap is empty
+        current = nullptr; // If empty, set current to nullptr
+        return *this; // Return this instance of iterator
     }
-    std::pop_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; });
-    current = heap.back();
-    heap.pop_back();
-    return *this;
+    std::pop_heap(heap.begin(), heap.end(), [](Node<T>* a, Node<T>* b) { return a->data > b->data; }); // Re-adjust the heap
+    current = heap.back(); // Set current to the last element of the heap
+    heap.pop_back(); // Remove the last element from the heap
+    return *this; // Return this instance of iterator
 }
+
 
 template<typename T>
 typename Node<T>::iterator_heap Node<T>::iterator_heap::operator++(int) {
